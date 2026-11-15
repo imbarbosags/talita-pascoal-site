@@ -3,11 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="only light">
+<meta name="supported-color-schemes" content="light">
+<meta name="theme-color" content="#F1E7DA">
 <title>Dra. Talita Pascoal | Pilates Clínico</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
 <style>
   :root{
+    color-scheme:only light;
     --roxo:#3B1A5A; --roxo-esc:#2A1142; --gesso:#F1E7DA; --gesso-2:#E8DAC8; --ouro:#B3945B; --tinta:#2B1A3A;
     --serifa:'Cormorant Garamond',Georgia,'Times New Roman',serif; --texto:'Comfortaa',system-ui,sans-serif;
     --margem:clamp(22px,6vw,96px);
@@ -456,7 +460,7 @@
       for(var j=0;j<M.pontos.length;j++){ M.pontos[j].el.classList.toggle('aceso',M.pontos[j].y<=alvo+2); }
       /* inversão suave: o fundo vira roxo e o texto clareia nas seções marcadas */
       var meio=y+M.H*0.55, esc=false;
-      for(var k=0;k<escuras.length;k++){ var st=escuras[k].getBoundingClientRect().top+y; if(meio>=st&&meio<st+escuras[k].offsetHeight){esc=true;break;} }
+      if(y>8) for(var k=0;k<escuras.length;k++){ var st=escuras[k].getBoundingClientRect().top+y; if(meio>=st&&meio<st+escuras[k].offsetHeight){esc=true;break;} }
       document.body.classList.toggle('escuro',esc);
     }
 
@@ -483,6 +487,21 @@
   /* só anima a entrada quando a foto de abertura carregou */
   function pronto(){ medir(); palco.classList.add('pronto'); }
   if(heroimg.complete&&heroimg.naturalWidth){ pronto(); } else { heroimg.addEventListener('load',pronto); heroimg.addEventListener('error',pronto); }
+
+  /* o site sempre abre no topo: ignora âncora que venha no link (ex.: #sobre) e a posição da visita anterior */
+  try{ if('scrollRestoration' in history){ history.scrollRestoration='manual'; } }catch(e){}
+  function irAoTopo(){
+    if(location.hash){ try{ history.replaceState(null,'',location.pathname+location.search); }catch(e){} }
+    window.scrollTo(0,0);
+  }
+  irAoTopo(); window.addEventListener('load',irAoTopo); window.addEventListener('pageshow',function(ev){ if(!ev.persisted){ irAoTopo(); } });
+  /* os links do menu rolam até a seção sem gravar a âncora no endereço */
+  [].forEach.call(document.querySelectorAll('a[href^="#"]'),function(a){
+    a.addEventListener('click',function(ev){
+      var alvo=document.querySelector(a.getAttribute('href')); if(!alvo) return;
+      ev.preventDefault(); alvo.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+  });
 
   /* guia de três perguntas */
   var escolha={foco:'reabilitação',modo:'individual',local:'na sua casa'}, rec=document.getElementById('rec');
