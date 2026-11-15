@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dra. Talita Pascoal | Pilates Clínico</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --roxo:#3B1A5A; --roxo-esc:#2A1142; --gesso:#F1E7DA; --gesso-2:#E8DAC8; --ouro:#B3945B; --tinta:#2B1A3A;
+    --serifa:'Cormorant Garamond',Georgia,'Times New Roman',serif; --texto:'Comfortaa',system-ui,sans-serif;
+    --margem:clamp(22px,6vw,96px);
+  }
+  @property --fundo{syntax:'<color>';inherits:true;initial-value:#F1E7DA}
+  @property --fundo2{syntax:'<color>';inherits:true;initial-value:#E8DAC8}
+  @property --fg{syntax:'<color>';inherits:true;initial-value:#2B1A3A}
+  @property --enfase{syntax:'<color>';inherits:true;initial-value:#3B1A5A}
+  @property --rot{syntax:'<color>';inherits:true;initial-value:#3B1A5A}
+  @property --btn-bg{syntax:'<color>';inherits:true;initial-value:#3B1A5A}
+  @property --btn-fg{syntax:'<color>';inherits:true;initial-value:#F1E7DA}
+  body{--fundo:#F1E7DA;--fundo2:#E8DAC8;--fg:#2B1A3A;--enfase:#3B1A5A;--rot:#3B1A5A;--btn-bg:#3B1A5A;--btn-fg:#F1E7DA;
+    transition:--fundo 1s ease,--fundo2 1s ease,--fg 1s ease,--enfase 1s ease,--rot 1s ease,--btn-bg 1s ease,--btn-fg 1s ease}
+  body.escuro{--fundo:#3B1A5A;--fundo2:#472368;--fg:#F1E7DA;--enfase:#C9AB73;--rot:#F1E7DA;--btn-bg:#C9AB73;--btn-fg:#2A1142}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--fundo);color:var(--fg);font-family:var(--texto);font-weight:400;font-size:16px;line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  img{display:block;max-width:100%}
+  a{color:inherit}
+  h1,h2,h3{font-family:var(--serifa);font-weight:500;line-height:1.02;letter-spacing:-.01em}
+  h2{font-size:clamp(38px,5.4vw,84px)}
+  h2 em,h1 em{font-style:italic;color:var(--enfase)}
+  .chamada h1 em{color:var(--roxo)}
+  .rotulo{display:inline-flex;align-items:center;gap:12px;font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--rot)}
+  .no{width:11px;height:11px;border-radius:50%;border:1.5px solid var(--ouro);background:var(--fundo);flex:none;transition:background .5s,transform .5s}
+  .no.aceso{background:var(--ouro);transform:scale(1.15)}
+  .botao{display:inline-flex;align-items:center;gap:10px;background:var(--roxo);color:var(--gesso);text-decoration:none;border:1px solid var(--roxo);
+    padding:15px 26px;border-radius:999px;font-size:14px;letter-spacing:.02em;cursor:pointer;font-family:inherit;transition:background .25s,color .25s,border-color .25s}
+  .botao:hover,.botao:focus-visible{background:var(--roxo-esc);border-color:var(--roxo-esc);outline:none}
+  .botao.claro{background:transparent;color:var(--gesso);border-color:var(--ouro)}
+  .botao.claro:hover,.botao.claro:focus-visible{background:var(--ouro);color:var(--roxo-esc)}
+  .surge{opacity:0;transform:translateY(26px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+  .surge.visto{opacity:1;transform:none}
+
+  /* ---------- topo ---------- */
+  .topo{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:24px;
+    padding:16px var(--margem);transition:background .4s,box-shadow .4s,padding .4s}
+  .topo.rolou{background:color-mix(in srgb,var(--fundo) 92%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 1px 0 rgba(59,26,90,.1);padding-top:10px;padding-bottom:10px}
+  .topo .marca{position:relative;display:block}
+  .topo .marca img{height:clamp(40px,5vw,54px);width:auto;transition:opacity 1s ease}
+  .topo .marca img.clara{position:absolute;left:0;top:0;opacity:0}
+  .escuro .topo .marca img.clara{opacity:1}
+  .escuro .topo .marca img.roxa{opacity:0}
+  .topo nav{display:flex;align-items:center;gap:clamp(14px,2.4vw,34px);font-size:13px}
+  .topo nav a{text-decoration:none;color:var(--rot)}
+  .topo nav a.link{position:relative}
+  .topo nav a.link::after{content:"";position:absolute;left:0;right:0;bottom:-5px;height:1px;background:var(--ouro);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+  .topo nav a.link:hover::after{transform:scaleX(1)}
+  .topo .botao{padding:11px 20px;font-size:13px;color:var(--btn-fg);background:var(--btn-bg);border-color:var(--btn-bg)}
+  @media (max-width:860px){.topo nav a.link{display:none}}
+
+  /* ---------- abertura em arco ---------- */
+  .hero{position:relative}
+  .palco{position:relative;height:100vh;height:100svh;min-height:560px;overflow:hidden;background:var(--gesso)}
+  .janela{position:absolute;inset:0;overflow:hidden}
+  .janela img{width:100%;height:100%;object-fit:cover;object-position:27% 30%;will-change:transform}
+  .veu{position:absolute;inset:0;pointer-events:none;opacity:0;
+    background:linear-gradient(to left,rgba(241,231,218,.97) 0%,rgba(241,231,218,.94) 40%,rgba(241,231,218,0) 60%)}
+  .chamada{position:absolute;right:var(--margem);top:50%;transform:translateY(-46%);width:min(36vw,540px)}
+  .quem{display:flex;align-items:flex-start;gap:14px}
+  .quem .no{margin-top:.62em;width:12px;height:12px}
+  .quem strong{display:block;font-family:var(--serifa);font-weight:500;font-size:clamp(28px,2.7vw,42px);line-height:1.05;color:var(--roxo-esc)}
+  .quem span:not(.no){display:block;margin-top:8px;font-size:clamp(12px,.95vw,13.5px);font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--roxo-esc)}
+  .chamada h1{font-size:clamp(54px,7.6vw,124px);color:var(--roxo-esc);margin:18px 0 22px}
+  .chamada h1 span{display:block;overflow:hidden}
+  .chamada h1 span b{display:block;font-weight:500;transform:translateY(105%);transition:transform 1.1s cubic-bezier(.2,.7,.2,1)}
+  .pronto .chamada h1 span b{transform:none}
+  .pronto .chamada h1 span:nth-child(2) b{transition-delay:.12s}
+  .chamada p{font-size:clamp(15px,1.25vw,18px);max-width:30em;color:var(--tinta);opacity:0;transition:opacity 1s .5s}
+  .chamada .acoes{display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin-top:30px;opacity:0;transition:opacity 1s .7s}
+  .pronto .chamada p,.pronto .chamada .acoes{opacity:1}
+  .chamada .fone{font-size:14px;color:var(--roxo);text-decoration:none;border-bottom:1px solid var(--ouro);padding-bottom:2px}
+  .role{position:absolute;left:var(--margem);bottom:26px;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--roxo);display:flex;align-items:center;gap:12px}
+  .role i{display:block;width:44px;height:1px;background:var(--roxo);transform-origin:left;animation:pulso 2s ease-in-out infinite}
+  @keyframes pulso{0%{transform:scaleX(0)}50%{transform:scaleX(1)}100%{transform:scaleX(1);opacity:0}}
+  @media (max-width:860px){
+    .janela img{object-position:27% 8%}
+    .veu{background:linear-gradient(to top,rgba(241,231,218,.98) 0%,rgba(241,231,218,.96) 50%,rgba(241,231,218,0) 74%)}
+    .chamada{left:var(--margem);right:var(--margem);top:auto;bottom:64px;transform:none;width:auto}
+    .chamada h1{font-size:clamp(44px,12vw,76px);margin:12px 0 10px}
+    .chamada{bottom:40px}
+    .chamada .acoes{margin-top:18px}
+    .role{display:none}
+  }
+
+  /* ---------- corpo com a linha que desce ---------- */
+  .corpo{position:relative}
+  #fio{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;overflow:visible}
+  #fio path{fill:none;stroke:var(--ouro);stroke-width:1.5;stroke-linecap:round}
+  #fio circle{fill:var(--ouro);transform-box:fill-box;transform-origin:center;transform:scale(0);transition:transform .6s cubic-bezier(.2,1.4,.4,1)}
+  #fio circle.aceso{transform:scale(1)}
+  section{position:relative}
+  .miolo{position:relative;z-index:2;max-width:1280px;margin:0 auto;padding:0 var(--margem)}
+
+  .manifesto{padding:clamp(110px,20vh,220px) 0;text-align:center}
+  .manifesto h2{font-size:clamp(40px,6.6vw,108px);margin-top:26px}
+  .manifesto p{max-width:34em;margin:30px auto 0;font-size:clamp(15px,1.3vw,18px)}
+
+  .guia{padding:clamp(80px,13vh,150px) 0;background:var(--fundo2)}
+  .guia .grade{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(32px,6vw,90px);align-items:start;margin-top:26px}
+  .guia h2{margin-bottom:20px}
+  .pergunta{border-top:1px solid color-mix(in srgb,var(--fg) 20%,transparent);padding:22px 0}
+  .pergunta h3{font-family:var(--texto);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--rot);font-weight:500;margin-bottom:14px;line-height:1.4}
+  .opcoes{display:flex;flex-wrap:wrap;gap:10px}
+  .opcoes button{font-family:inherit;font-size:14px;color:var(--rot);background:transparent;border:1px solid color-mix(in srgb,var(--fg) 38%,transparent);border-radius:999px;padding:11px 18px;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+  .opcoes button:hover{border-color:var(--rot)}
+  .opcoes button[aria-pressed="true"]{background:var(--btn-bg);color:var(--btn-fg);border-color:var(--btn-bg)}
+  .opcoes button:focus-visible{outline:2px solid var(--ouro);outline-offset:2px}
+  .resposta{margin-top:10px;background:var(--roxo-esc);color:var(--gesso);border:1px solid rgba(179,148,91,.3);border-radius:28px;padding:clamp(24px,3vw,38px)}
+  .resposta small{display:block;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--ouro);margin-bottom:12px}
+  .resposta p.rec{font-family:var(--serifa);font-size:clamp(26px,2.6vw,38px);line-height:1.12;min-height:2.3em}
+  .resposta p.passo{font-size:14px;opacity:.82;margin:14px 0 20px}
+
+  .formatos{padding:clamp(90px,15vh,170px) 0}
+  .formatos .cab{display:flex;flex-direction:column;align-items:flex-end;text-align:right;gap:22px;margin-bottom:clamp(40px,7vh,80px)}
+  .cartoes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,2vw,26px)}
+  .cartao{background:var(--fundo2);border-radius:999px 999px 22px 22px;padding:clamp(70px,9vw,120px) clamp(18px,2vw,28px) clamp(26px,3vw,38px);text-align:center;min-height:clamp(300px,34vw,420px);
+    display:flex;flex-direction:column;justify-content:flex-end;transition:background .4s,color .4s,transform .4s}
+  .cartao:hover{background:var(--roxo-esc);color:var(--gesso);transform:translateY(-6px)}
+  .cartao small{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ouro)}
+  .cartao h3{font-size:clamp(28px,2.8vw,40px);margin:10px 0 12px}
+  .cartao p{font-size:14px;line-height:1.6;opacity:.86}
+
+  .passos{padding:clamp(90px,15vh,170px) 0}
+  .passos h2{margin:22px 0 clamp(44px,8vh,90px);max-width:12em}
+  .passos ol{list-style:none}
+  .passos li{display:grid;grid-template-columns:clamp(90px,12vw,170px) minmax(0,1fr) minmax(0,1.3fr);gap:clamp(18px,3vw,48px);align-items:baseline;
+    border-top:1px solid color-mix(in srgb,var(--ouro) 55%,transparent);padding:clamp(26px,4.5vh,46px) 0}
+  .passos li b{display:block;font-family:var(--serifa);font-weight:500;font-size:clamp(52px,6vw,92px);line-height:.9;color:var(--ouro)}
+  .passos li h3{font-size:clamp(28px,2.8vw,42px)}
+  .passos li p{font-size:15px;opacity:.86;max-width:30em}
+  @media (max-width:860px){.passos li{display:block}.passos li h3{margin:16px 0 8px}}
+
+  .galeria{height:320vh}
+  .galeria .fixo{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;z-index:2;background:var(--fundo);display:flex;flex-direction:column;justify-content:center}
+  .galeria .cab{padding:0 var(--margem);display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:clamp(20px,4vh,44px)}
+  .galeria .cab h2{margin-top:18px}
+  .galeria .cab p{max-width:24em;font-size:14px;opacity:.8}
+  .trilho{display:flex;gap:clamp(16px,2.2vw,32px);padding:0 var(--margem);will-change:transform;width:max-content}
+  .trilho figure{flex:none;width:clamp(220px,25vw,380px);height:min(58vh,560px);border-radius:999px 999px 18px 18px;overflow:hidden;background:var(--fundo2);position:relative}
+  .trilho figure.baixa{margin-top:6vh}
+  .trilho figure img{width:100%;height:100%;object-fit:cover}
+  .trilho figure.vaga{border:1.5px dashed var(--ouro);background:transparent;display:flex;align-items:flex-end;justify-content:center;text-align:center;padding:0 24px 40px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--rot)}
+  @media (max-width:860px){
+    .galeria{height:auto;padding:80px 0}
+    .galeria .fixo{position:relative;height:auto;display:block}
+    .galeria .cab{display:block}.galeria .cab p{margin-top:12px}
+    .trilho{overflow-x:auto;width:auto;scroll-snap-type:x mandatory;padding-bottom:12px;transform:none !important}
+    .trilho figure{width:70vw;height:92vw;scroll-snap-align:center}.trilho figure.baixa{margin-top:0}
+  }
+
+  .sobre{padding:clamp(90px,15vh,170px) 0;background:var(--fundo2)}
+  .sobre .grade{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(32px,7vw,110px);align-items:center}
+  .sobre .arco{border-radius:999px 999px 22px 22px;overflow:hidden;aspect-ratio:4/5.4;background:var(--fundo)}
+  .sobre .arco img{width:100%;height:118%;object-fit:cover;object-position:50% 20%;will-change:transform}
+  .sobre h2{margin:22px 0 22px}
+  .sobre p{max-width:32em;margin-bottom:16px}
+  .sobre .registro{margin-top:26px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--rot);border-top:1px solid color-mix(in srgb,var(--fg) 22%,transparent);padding-top:18px}
+
+  .vozes{padding:clamp(90px,15vh,170px) 0;text-align:center}
+  .vozes h2{margin:22px 0 clamp(36px,6vh,64px)}
+  .vozes .lista{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2vw,26px)}
+  .vozes .vaga{border:1.5px dashed var(--ouro);border-radius:24px;min-height:210px;display:flex;align-items:center;justify-content:center;padding:26px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--rot)}
+
+  .fim{padding:clamp(100px,18vh,200px) 0 0;text-align:center}
+  .fim h2{font-size:clamp(42px,7vw,116px);margin:24px auto 34px;max-width:11em}
+  .fim .botao{background:var(--btn-bg);color:var(--btn-fg);border-color:var(--btn-bg)}
+  .fim .fone{display:block;margin-top:20px;font-size:15px;opacity:.85}
+  .rodape{margin-top:clamp(80px,14vh,150px);border-top:1px solid rgba(179,148,91,.35);padding:28px 0 34px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;font-size:12px;letter-spacing:.06em;opacity:.8}
+  .rodape img{height:52px;width:auto}
+
+  @media (max-width:860px){
+    .guia .grade,.sobre .grade{grid-template-columns:1fr}
+    .cartoes{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .passos ol,.vozes .lista{grid-template-columns:1fr}
+    .formatos .cab{align-items:flex-start;text-align:left}
+    .formatos .rotulo{flex-direction:row-reverse}
+    #fio{opacity:.55}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .surge{transition:none;opacity:1;transform:none}
+    .chamada h1 span b{transition:none}
+    .role i{animation:none}
+  }
+</style>
+</head>
+<body>
+
+<header class="topo" id="topo">
+  <a class="marca" href="#inicio" aria-label="Início"><img class="roxa" src="logo-roxa.svg" alt="Talita Pascoal — Pilates | Fisioterapia"><img class="clara" src="logo-branca.svg" alt="" aria-hidden="true"></a>
+  <nav>
+    <a class="link" href="#formatos">Formatos</a>
+    <a class="link" href="#passos">Como funciona</a>
+    <a class="link" href="#galeria">Galeria</a>
+    <a class="link" href="#sobre">Sobre</a>
+    <a class="botao" href="#contato">Agendar avaliação</a>
+  </nav>
+</header>
+
+<section class="hero" id="inicio" aria-label="Abertura">
+  <div class="palco" id="palco">
+    <div class="janela" id="janela"><img id="heroimg" src="hero.jpg" alt="Dra. Talita Pascoal segurando um anel de pilates"></div>
+    <div class="veu" id="veu"></div>
+    <div class="chamada">
+      <div class="quem"><span class="no aceso"></span><div><strong>Dra. Talita Pascoal</strong><span>Fisioterapeuta · CREFITO 396473-F</span></div></div>
+      <h1><span><b>Pilates</b></span><span><b><em>Clínico</em></b></span></h1>
+      <p>Movimento, saúde e qualidade de vida. Atendimento individual ou em grupo, no conforto da sua casa ou do seu condomínio.</p>
+      <div class="acoes">
+        <a class="botao" href="#contato">Comece com uma avaliação</a>
+        <a class="fone" href="tel:+5583996727131">(83) 99672-7131</a>
+      </div>
+    </div>
+    <div class="role">Role <i></i></div>
+  </div>
+</section>
+
+<main class="corpo" id="corpo">
+  <svg id="fio" aria-hidden="true"><path id="fiop" d=""/></svg>
+
+  <section class="manifesto">
+    <div class="miolo">
+      <span class="rotulo surge"><span class="no" data-no></span>O ponto de partida</span>
+      <h2 class="surge">Um olhar <em>clínico</em><br>para o seu tratamento</h2>
+      <p class="surge">Pilates conduzido por fisioterapeuta, com atendimento personalizado e acompanhamento profissional em cada aula.</p>
+    </div>
+  </section>
+
+  <section class="guia" id="guia">
+    <div class="miolo">
+      <span class="rotulo surge"><span class="no" data-no></span>Encontre o seu formato</span>
+      <div class="grade">
+        <div class="surge">
+          <h2>Três perguntas, <em>um caminho</em></h2>
+          <p>Responda ao lado e veja como o Pilates Clínico pode se encaixar na sua rotina. Depois, é só marcar a avaliação.</p>
+        </div>
+        <div class="surge">
+          <div class="pergunta">
+            <h3>1 · O que você procura?</h3>
+            <div class="opcoes" data-grupo="foco">
+              <button type="button" data-v="reabilitação" aria-pressed="true">Reabilitação</button>
+              <button type="button" data-v="condicionamento físico" aria-pressed="false">Condicionamento físico</button>
+              <button type="button" data-v="movimento e qualidade de vida" aria-pressed="false">Qualidade de vida</button>
+            </div>
+          </div>
+          <div class="pergunta">
+            <h3>2 · Como prefere praticar?</h3>
+            <div class="opcoes" data-grupo="modo">
+              <button type="button" data-v="individual" aria-pressed="true">Individual</button>
+              <button type="button" data-v="em grupo" aria-pressed="false">Em grupo</button>
+            </div>
+          </div>
+          <div class="pergunta">
+            <h3>3 · Onde fica melhor para você?</h3>
+            <div class="opcoes" data-grupo="local">
+              <button type="button" data-v="na sua casa" aria-pressed="true">Em casa</button>
+              <button type="button" data-v="no seu condomínio" aria-pressed="false">No condomínio</button>
+            </div>
+          </div>
+          <div class="resposta" aria-live="polite">
+            <small>Sugestão para você</small>
+            <p class="rec" id="rec"></p>
+            <p class="passo">O primeiro passo é uma avaliação individualizada.</p>
+            <a class="botao claro" href="#contato">Agendar avaliação</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="formatos" id="formatos">
+    <div class="miolo">
+      <div class="cab">
+        <span class="rotulo surge">Formatos de atendimento<span class="no" data-no></span></span>
+        <h2 class="surge">Do seu jeito,<br><em>no seu espaço</em></h2>
+      </div>
+      <div class="cartoes">
+        <article class="cartao surge"><small>Modalidade</small><h3>Individual</h3><p>Atenção exclusiva, no seu ritmo e para os seus objetivos.</p></article>
+        <article class="cartao surge"><small>Modalidade</small><h3>Em grupo</h3><p>Aulas em grupo com acompanhamento profissional.</p></article>
+        <article class="cartao surge"><small>Local</small><h3>Em casa</h3><p>O Pilates Clínico vai até você, no conforto da sua casa.</p></article>
+        <article class="cartao surge"><small>Local</small><h3>No condomínio</h3><p>Mais movimento e qualidade de vida, sem sair do seu condomínio.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="passos" id="passos" data-escuro>
+    <div class="miolo">
+      <span class="rotulo surge"><span class="no" data-no></span>Como funciona</span>
+      <h2 class="surge">Começa com uma <em>avaliação</em></h2>
+      <ol>
+        <li class="surge"><b>1</b><h3>Avaliação individualizada</h3><p>Uma conversa e uma avaliação para entender o seu momento e o que você busca.</p></li>
+        <li class="surge"><b>2</b><h3>O seu formato</h3><p>Individual ou em grupo, em casa ou no condomínio: o que fizer mais sentido para você.</p></li>
+        <li class="surge"><b>3</b><h3>Aulas acompanhadas</h3><p>Reabilitação e condicionamento físico com acompanhamento profissional.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="galeria" id="galeria">
+    <div class="fixo">
+      <div class="cab">
+        <div><span class="rotulo"><span class="no" data-no></span>Galeria</span><h2>Movimento <em>em cena</em></h2></div>
+        <p>As fotos de exercícios e atendimentos entram aqui.</p>
+      </div>
+      <div class="trilho" id="trilho">
+        <figure class="vaga">Foto de exercício</figure>
+        <figure class="vaga baixa">Foto de exercício</figure>
+        <figure class="vaga">Foto de atendimento</figure>
+        <figure class="vaga baixa">Foto de exercício</figure>
+        <figure class="vaga">Foto de atendimento</figure>
+        <figure class="vaga baixa">Foto de exercício</figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="vozes" id="depoimentos">
+    <div class="miolo">
+      <span class="rotulo surge"><span class="no" data-no></span>Depoimentos</span>
+      <h2 class="surge">Quem pratica, <em>conta</em></h2>
+      <div class="lista">
+        <div class="vaga surge">Depoimento de paciente</div>
+        <div class="vaga surge">Depoimento de paciente</div>
+        <div class="vaga surge">Depoimento de paciente</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sobre" id="sobre">
+    <div class="miolo">
+      <div class="grade">
+        <div class="arco surge"><img id="retrato" src="anel.jpg" alt="Dra. Talita Pascoal com o anel de pilates" loading="lazy"></div>
+        <div>
+          <span class="rotulo surge"><span class="no" data-no></span>Quem conduz</span>
+          <h2 class="surge">Dra. Talita <em>Pascoal</em></h2>
+          <p class="surge">Fisioterapeuta, trabalha com Pilates Clínico voltado para reabilitação, condicionamento físico, movimento, saúde e qualidade de vida.</p>
+          <p class="surge">O atendimento é personalizado e acontece onde for mais cômodo para você: em casa ou no condomínio, individualmente ou em grupo.</p>
+          <p class="registro surge">Fisioterapeuta · CREFITO 396473-F</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="fim" id="contato" data-escuro>
+    <div class="miolo">
+      <span class="rotulo surge"><span class="no" data-no></span>Contato</span>
+      <h2 class="surge">Comece com uma avaliação <em>individualizada</em></h2>
+      <a class="botao surge" href="tel:+5583996727131">Ligar para agendar</a>
+      <span class="fone surge">(83) 99672-7131</span>
+      <footer class="rodape">
+        <img src="logo-branca.svg" alt="Talita Pascoal — Pilates | Fisioterapia">
+        <span>Dra. Talita Pascoal | Fisioterapeuta | CREFITO 396473-F</span>
+      </footer>
+    </div>
+  </section>
+</main>
+
+<script>
+(function(){
+  var doc=document.documentElement;
+  function lim(v){return v<0?0:v>1?1:v}
+  function suave(x){return x*x*(3-2*x)}
+  function mix(a,b,t){return a+(b-a)*t}
+
+  var topo=document.getElementById('topo'), hero=document.getElementById('inicio'), palco=document.getElementById('palco');
+  var chamada=document.querySelector('.chamada'), janela=document.getElementById('janela'), heroimg=document.getElementById('heroimg'), veu=document.getElementById('veu');
+  var corpo=document.getElementById('corpo'), fio=document.getElementById('fio'), fiop=document.getElementById('fiop');
+  var galeria=document.getElementById('galeria'), trilho=document.getElementById('trilho'), retrato=document.getElementById('retrato');
+  var nos=[].slice.call(corpo.querySelectorAll('[data-no]'));
+  var M={W:0,H:0,estreito:false,total:0,amostras:[],nosY:[],pontos:[]};
+  var numeros=[].slice.call(corpo.querySelectorAll('.passos li b'));
+  var escuras=[].slice.call(document.querySelectorAll('[data-escuro]'));
+  /* posição no layout, sem contar as animações de entrada (transform) nem o deslocamento do bloco preso */
+  function lugar(el){
+    var x=el.offsetWidth/2, y=el.offsetHeight/2;
+    while(el&&el!==corpo){ x+=el.offsetLeft; if(!el.classList.contains('fixo')){ y+=el.offsetTop; } el=el.offsetParent; }
+    return {x:x,y:y};
+  }
+
+  /* ----- linha que desce pela página, passando por um nó em cada seção ----- */
+  function tracarFio(){
+    var base=corpo.getBoundingClientRect(), larg=corpo.clientWidth, alt=corpo.offsetHeight;
+    fio.setAttribute('viewBox','0 0 '+larg+' '+alt);
+    var estreito=window.innerWidth<=860, mg=parseFloat(getComputedStyle(corpo.querySelector('.miolo')).paddingLeft)||24;
+    var calha=Math.max(8,mg*0.4), rr=14;
+    var pts=[{x:estreito?calha:larg/2,y:0}];
+    nos.forEach(function(n){pts.push(lugar(n))});
+    var d='M'+pts[0].x+' '+pts[0].y;
+    for(var i=1;i<pts.length;i++){
+      var a=pts[i-1], b=pts[i], dy=(b.y-a.y)*0.5;
+      var mesmoLado=Math.abs(a.x-b.x)<80;
+      if(estreito||mesmoLado){
+        /* desce por fora do texto: vai até a calha na margem, desce reto e volta até o nó */
+        var gx=estreito?calha:Math.min(a.x,b.x)-Math.max(20,mg*0.45);
+        if(a.x-gx>rr){ d+=' L'+(gx+rr)+' '+a.y+' Q'+gx+' '+a.y+','+gx+' '+(a.y+rr); }
+        d+=' L'+gx+' '+(b.y-rr)+' Q'+gx+' '+b.y+','+(gx+rr)+' '+b.y+' L'+b.x+' '+b.y;
+      }else{
+        d+=' C'+a.x+' '+(a.y+dy)+','+b.x+' '+(b.y-dy)+','+b.x+' '+b.y;
+      }
+    }
+    fiop.setAttribute('d',d);
+    M.total=fiop.getTotalLength();
+    fiop.style.strokeDasharray=M.total;
+    M.amostras=[];
+    for(var k=0;k<=240;k++){M.amostras.push(fiop.getPointAtLength(M.total*k/240).y)}
+    M.nosY=pts.slice(1).map(function(p){return p.y});
+    /* um ponto sobre a linha ao lado de cada número de "Como funciona" */
+    [].slice.call(fio.querySelectorAll('circle')).forEach(function(c){fio.removeChild(c)});
+    M.pontos=numeros.map(function(n){
+      var py=lugar(n).y, pt=fiop.getPointAtLength(comprimentoAte(py));
+      var c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+      c.setAttribute('cx',pt.x); c.setAttribute('cy',py); c.setAttribute('r',5.5); fio.appendChild(c);
+      return {y:py,el:c};
+    });
+  }
+  function comprimentoAte(y){
+    var s=M.amostras, n=s.length-1;
+    if(y<=s[0]) return 0; if(y>=s[n]) return M.total;
+    for(var k=1;k<=n;k++){ if(s[k]>=y){ var f=(y-s[k-1])/((s[k]-s[k-1])||1); return M.total*(k-1+f)/n; } }
+    return M.total;
+  }
+
+  function medir(){
+    M.W=window.innerWidth; M.H=palco.clientHeight||window.innerHeight; M.estreito=M.W<=860;
+    /* tela estreita: a foto ocupa só a área acima do texto, para o nome e o CREFITO ficarem sempre legíveis */
+    M.base=M.estreito?(chamada.offsetHeight+40+26):0;
+    janela.style.bottom=M.estreito?M.base+'px':'';
+    tracarFio(); desenhar();
+  }
+
+  function desenhar(){
+    var y=window.pageYOffset||doc.scrollTop;
+    topo.classList.toggle('rolou',y>40);
+
+    /* abertura: foto inteira desde o início, com um leve deslocamento ao rolar */
+    veu.style.opacity=M.estreito?0:1;
+    heroimg.style.transform='scale(1.06) translate3d(0,'+(Math.min(y,M.H)*0.04)+'px,0)';
+
+    /* linha */
+    if(M.total){
+      var topoCorpo=corpo.getBoundingClientRect().top+y, alvo=y+M.H*0.62-topoCorpo;
+      fiop.style.strokeDashoffset=M.total-comprimentoAte(alvo);
+      for(var i=0;i<nos.length;i++){ nos[i].classList.toggle('aceso',M.nosY[i]<=alvo+2); }
+      for(var j=0;j<M.pontos.length;j++){ M.pontos[j].el.classList.toggle('aceso',M.pontos[j].y<=alvo+2); }
+      /* inversão suave: o fundo vira roxo e o texto clareia nas seções marcadas */
+      var meio=y+M.H*0.55, esc=false;
+      for(var k=0;k<escuras.length;k++){ var st=escuras[k].getBoundingClientRect().top+y; if(meio>=st&&meio<st+escuras[k].offsetHeight){esc=true;break;} }
+      document.body.classList.toggle('escuro',esc);
+    }
+
+    /* galeria horizontal presa (desktop) */
+    if(!M.estreito){
+      var g=galeria.getBoundingClientRect(), gp=lim(-g.top/((galeria.offsetHeight-M.H)||1));
+      var sobra=Math.max(0,trilho.scrollWidth-M.W);
+      trilho.style.transform='translate3d('+(-sobra*suave(gp))+'px,0,0)';
+    }
+
+    /* retrato com leve paralaxe */
+    var rr=retrato.parentNode.getBoundingClientRect();
+    if(rr.bottom>0&&rr.top<M.H){ var p=(rr.top+rr.height/2-M.H/2)/M.H; retrato.style.transform='translate3d(0,'+(-8+p*-7)+'%,0)'; }
+  }
+
+  var pedido=false;
+  window.addEventListener('scroll',function(){ if(!pedido){pedido=true;requestAnimationFrame(function(){pedido=false;desenhar()})} },{passive:true});
+  window.addEventListener('resize',medir);
+  window.addEventListener('load',medir);
+  if('ResizeObserver' in window){ new ResizeObserver(medir).observe(corpo); }
+  if(document.fonts&&document.fonts.ready){document.fonts.ready.then(medir)}
+  medir();
+
+  /* só anima a entrada quando a foto de abertura carregou */
+  function pronto(){ medir(); palco.classList.add('pronto'); }
+  if(heroimg.complete&&heroimg.naturalWidth){ pronto(); } else { heroimg.addEventListener('load',pronto); heroimg.addEventListener('error',pronto); }
+
+  /* guia de três perguntas */
+  var escolha={foco:'reabilitação',modo:'individual',local:'na sua casa'}, rec=document.getElementById('rec');
+  function sugerir(){ rec.textContent='Pilates Clínico '+escolha.modo+', '+escolha.local+', com foco em '+escolha.foco+'.'; }
+  [].forEach.call(document.querySelectorAll('.opcoes'),function(grupo){
+    grupo.addEventListener('click',function(ev){
+      var bt=ev.target.closest('button'); if(!bt) return;
+      [].forEach.call(grupo.querySelectorAll('button'),function(o){o.setAttribute('aria-pressed',o===bt?'true':'false')});
+      escolha[grupo.getAttribute('data-grupo')]=bt.getAttribute('data-v'); sugerir();
+    });
+  });
+  sugerir();
+
+  /* entradas suaves */
+  var itens=document.querySelectorAll('.surge');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('visto');io.unobserve(en.target)}})},{threshold:0.15});
+    itens.forEach(function(el){
+      var irm=[].slice.call(el.parentNode.children).filter(function(c){return c.classList.contains('surge')});
+      el.style.transitionDelay=(irm.indexOf(el)*90)+'ms'; io.observe(el);
+    });
+  }else{ itens.forEach(function(el){el.classList.add('visto')}); }
+})();
+</script>
+</body>
+</html>
