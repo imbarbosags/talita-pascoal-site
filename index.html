@@ -109,6 +109,9 @@
   .guia{padding:clamp(80px,13vh,150px) 0;background:var(--fundo2)}
   .guia .grade{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(32px,6vw,90px);align-items:start;margin-top:26px}
   .guia h2{margin-bottom:20px}
+  .vaga-guia{margin-top:clamp(28px,5vh,56px);width:min(100%,360px);aspect-ratio:4/5;border:1.5px dashed var(--ouro);border-radius:999px 999px 22px 22px;
+    display:flex;align-items:flex-end;justify-content:center;padding-bottom:36px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--rot)}
+  @media (max-width:860px){.vaga-guia{display:none}}
   .pergunta{border-top:1px solid color-mix(in srgb,var(--fg) 20%,transparent);padding:22px 0}
   .pergunta h3{font-family:var(--texto);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--rot);font-weight:500;margin-bottom:14px;line-height:1.4}
   .opcoes{display:flex;flex-wrap:wrap;gap:10px}
@@ -243,6 +246,7 @@
         <div class="surge">
           <h2>Três perguntas, <em>um caminho</em></h2>
           <p>Responda ao lado e veja como o Pilates Clínico pode se encaixar na sua rotina. Depois, é só marcar a avaliação.</p>
+          <figure class="vaga-guia">Foto</figure>
         </div>
         <div class="surge">
           <div class="pergunta">
