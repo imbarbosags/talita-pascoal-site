@@ -44,4 +44,3 @@ gh api -X POST repos/{owner}/talita-pascoal-site/pages -f "source[branch]=main" 
 
 - Fotos de exercícios e de atendimentos (galeria)
 - Depoimentos de pacientes
-- Confirmar se o botão de contato deve abrir o WhatsApp em vez de ligar
